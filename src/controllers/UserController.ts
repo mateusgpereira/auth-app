@@ -31,7 +31,7 @@ class UserController {
   }
 
   public async show(req: Request, res: Response): Promise<Response> {
-    const { userId } = req.params
+    const userId = req.user.id
 
     const user = await showUserService.execute(userId)
     if (!user) {

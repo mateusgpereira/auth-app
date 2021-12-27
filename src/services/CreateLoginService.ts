@@ -23,8 +23,6 @@ class CreateLoginService {
     }
 
     const { secret, expiresIn } = authConfig.jwt
-    console.log(process.env.TOKEN_SECRET)
-    console.log(authConfig)
     const token = sign({ email: user.email }, secret, { subject: user.id, expiresIn })
     return { token }
   }
