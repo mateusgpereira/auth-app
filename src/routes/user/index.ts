@@ -1,7 +1,6 @@
-import { Router } from "express"
+import { Router } from 'express'
 
-import UserController from "@controllers/UserController"
-import User from "@models/User"
+import UserController from '@controllers/UserController'
 
 const routes = Router()
 const userController = new UserController()

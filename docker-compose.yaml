@@ -3,9 +3,7 @@ services:
   database:
     image: 'mongo'
     container_name: 'mongo_db'
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: password
+    restart: always
     volumes:
       - /data/auth_db:/data/db
     ports:
