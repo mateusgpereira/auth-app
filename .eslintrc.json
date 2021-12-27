@@ -15,7 +15,8 @@
   },
   "plugins": [
     "@typescript-eslint",
-    "prettier"
+    "prettier",
+    "eslint-plugin-import-helpers"
   ],
   "rules": {
     "semi": [
@@ -29,13 +30,13 @@
       {
         "ts": "never"
       }
-    ],
+    ]
   },
   "settings": {
     "import/resolver": {
-      "typescript": {
-        "directory": "./tsconfig.json"
+      "node": {
+        "extensions": [".js", ".ts"]
       }
     }
-  }
+  },
 }
