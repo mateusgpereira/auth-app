@@ -1,6 +1,7 @@
 import { User } from '@models/User'
 import { Request, Response } from 'express'
 import createUserService from '../services/CreateUserService'
+import showUserService from '../services/ShowUserService'
 
 interface UserResponse {
   name: string
@@ -27,6 +28,17 @@ class UserController {
     const user = userToResponse(createdUser)
 
     return res.status(201).json(user)
+  }
+
+  public async show(req: Request, res: Response): Promise<Response> {
+    const { userId } = req.params
+
+    const user = await showUserService.execute(userId)
+    if (!user) {
+      return res.status(404)
+    }
+
+    return res.json(userToResponse(user))
   }
 }
 

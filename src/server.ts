@@ -1,12 +1,7 @@
-/* eslint-disable import/order */
 import express from 'express'
-import dotenv from 'dotenv'
-import routes from './routes'
-
-dotenv.config()
-
-// eslint-disable-next-line import/first
+import 'dotenv/config'
 import '@config/db'
+import routes from './routes'
 
 const app = express()
 
