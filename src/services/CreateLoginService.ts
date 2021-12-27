@@ -1,6 +1,6 @@
 import authConfig from '@config/authconfig'
 import { sign } from 'jsonwebtoken'
-import InvalidCredentials from 'src/errors/InvalidCredentials'
+import AppError from 'src/errors/AppError'
 import UserModel from '../models/User'
 import hashProvider from '../providers/HashProvider'
 
@@ -13,13 +13,13 @@ class CreateLoginService {
     const user = await UserModel.findOne({ email })
 
     if (!user) {
-      throw new InvalidCredentials()
+      throw new AppError('Invalid Credentials', 401)
     }
 
     const passwordMatches = await hashProvider.compare(password, user.password)
 
     if (!passwordMatches) {
-      throw new InvalidCredentials()
+      throw new AppError('Invalid Credentials', 401)
     }
 
     const { secret, expiresIn } = authConfig.jwt

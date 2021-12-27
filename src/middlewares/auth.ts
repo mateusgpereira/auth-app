@@ -1,7 +1,7 @@
+import authconfig from '@config/authconfig'
 import { NextFunction, Request, Response } from 'express'
 import { verify } from 'jsonwebtoken'
-import Unauthorized from 'src/errors/Unauthorized'
-import authconfig from '@config/authconfig'
+import AppError from 'src/errors/AppError'
 
 interface TokenPayload {
   sub: string
@@ -10,7 +10,7 @@ interface TokenPayload {
 const auth = (req: Request, res: Response, next: NextFunction) => {
   const authHeader = req.headers.authorization
   if (!authHeader) {
-    throw new Unauthorized()
+    throw new AppError('Authentication Missing', 401)
   }
 
   const [, token] = authHeader.split(' ')
@@ -22,7 +22,7 @@ const auth = (req: Request, res: Response, next: NextFunction) => {
     req.user = { id: sub }
     return next()
   } catch (error) {
-    throw new Unauthorized()
+    throw new AppError('Authentication Error', 401)
   }
 }
 
